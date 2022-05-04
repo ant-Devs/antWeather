@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import './App.css';
 
 function App() {
@@ -21,31 +22,45 @@ function App() {
     }
   }
 
-  async function getWeather(locationCode, includeDetails = false) {
+  async function getWeather(location, includeDetails = false) {
     try {
+      const locationDetails = await getLocation(location);
+      const locationCode = locationDetails[0].Key;
       const url = `${apiDetails.weatherURL}${locationCode}?apikey=${apiDetails.apiKey}&details=${includeDetails}`
 
       const data = await fetch(url);
       const jsonData = await data.json();
-      console.log(jsonData);
+      console.log(jsonData);  
       return jsonData;
     }
     catch(err) {
       console.error(err);
     }
-  }
+  } 
+   
+  const [location, setLocation ] = useState('');
 
-  const getting = async ( ) => {
-    getLocation('accra').then(locationDetails => {
-      console.log(locationDetails)
-      getWeather(locationDetails[0].Key)
-    })
-  }
-  
-  getting();
+  const [weather, setWeather] = useState({});
+
+  async function submission(e) {
+    
+      e.preventDefault();
+      console.log(location)
+      const data = await getWeather(location)
+      setWeather(data[0]);
+      
+    }
   return (
     <div className="App">
-      
+      <h2 className="title">antWeather</h2>
+      <form onSubmit={submission}>
+        <input type="text" onChange={(e) => {
+          setLocation(e.target.value);
+        }} />
+        <input type="submit" value="Get Weather" />
+      </form>
+      <h2>The weather is </h2>
+      <p>{ weather ? weather.WeatherText : 'no weather atm'}</p>
     </div>
   );
 }
