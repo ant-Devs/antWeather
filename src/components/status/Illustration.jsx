@@ -10,11 +10,19 @@ const Illustration = () => {
 		<div className="self-center text-center ">
 			<p>
 				{WeatherIcon ? (
-					<img
-						className="w-48 mx-auto"
-						src={`./icons/${WeatherIcon}-s.png`}
-						alt={WeatherText}
-					/>
+					WeatherIcon < 10 ? (
+						<img
+							className="w-48 mx-auto"
+							src={`./icons/0${WeatherIcon}-s.png`}
+							alt={WeatherText}
+						/>
+					) : (
+						<img
+							className="w-48 mx-auto"
+							src={`./icons/${WeatherIcon}-s.png`}
+							alt={WeatherText}
+						/>
+					)
 				) : (
 					""
 				)}

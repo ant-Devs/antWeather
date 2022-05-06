@@ -5,7 +5,6 @@ function TimePlace(className) {
 	let date = new Date();
 
 	const status = useContext(StatusContext);
-	console.log(status);
 
 	return (
 		<section

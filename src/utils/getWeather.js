@@ -5,7 +5,7 @@ module.exports = async function getWeather(
 	includeDetails = true
 ) {
 	try {
-		const url = `${apiDetails.weatherURL}${locationCode}?apikey=${apiDetails.apiKey}&details=${includeDetails}`;
+		const url = `${apiDetails.weatherURL}${locationCode}?apikey=${apiDetails.apiKey2}&details=${includeDetails}`;
 
 		const data = await fetch(url);
 		const jsonData = await data.json();

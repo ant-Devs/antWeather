@@ -1,8 +1,9 @@
-import { ipURL } from "./apiDetails";
+import { geoLocationURL } from "./apiDetails";
 
-async function getLocation2() {
-	console.log(ipURL);
-	const data = await fetch(ipURL);
+async function getLocation2(geoLocation) {
+	const data = await fetch(
+		`${geoLocationURL}${geoLocation.coords.latitude},${geoLocation.coords.longitude}`
+	);
 	const jsonData = await data.json();
 
 	return jsonData;

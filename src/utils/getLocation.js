@@ -2,7 +2,7 @@ const apiDetails = require("./apiDetails");
 
 module.exports = async function getLocation(city) {
 	try {
-		const url = `${apiDetails.locationsURL}?apikey=${apiDetails.apiKey}&q=${city}`;
+		const url = `${apiDetails.locationsURL}?apikey=${apiDetails.apiKey2}&q=${city}`;
 
 		const data = await fetch(url);
 		const jsonData = await data.json();

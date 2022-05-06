@@ -16,7 +16,7 @@ const Input = ({ onSubmitHandler }) => {
 			"
 		>
 			<input
-				className="px-5 py-2 md:w-5/6 font-bold bg-transparent border md:border-r-0 focus:outline-none text-lg"
+				className="px-5 py-2 font-bold bg-transparent border md:border-r-0 focus:outline-none text-lg"
 				ref={inputRef}
 				placeholder="Location"
 			/>

@@ -54,22 +54,20 @@ function App() {
 		}
 	}
 
-	async function fetchData() {
+	function fetchData() {
 		setLoading(true);
-		const data = await getLocation2();
-		console.log(data.city);
+		navigator.geolocation.getCurrentPosition(async (e) => {
+			const locationDetails = await getLocation2(e);
+			const weatherDetails = await getWeather(locationDetails.Key);
 
-		const locationDetails = await getLocation(data.city);
-		const weatherDetails = await getWeather(locationDetails[0].Key);
-		console.log(weatherDetails);
+			let newState = {
+				...locationDetails,
+				...weatherDetails[0],
+			};
 
-		let newState = {
-			...locationDetails[0],
-			...weatherDetails[0],
-		};
-
-		setStatus(newState);
-		setLoading(false);
+			setStatus(newState);
+			setLoading(false);
+		});
 	}
 
 	useEffect(() => {
