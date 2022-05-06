@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/body.css";
 
 // utils
 import getLocation from "./utils/getLocation";
 import getWeather from "./utils/getWeather";
+import getLocation2 from "./utils/getLocation2";
 
 // components
 import Input from "./components/Input/Input";
@@ -52,6 +53,28 @@ function App() {
 			setIsError(true);
 		}
 	}
+
+	async function fetchData() {
+		setLoading(true);
+		const data = await getLocation2();
+		console.log(data.city);
+
+		const locationDetails = await getLocation(data.city);
+		const weatherDetails = await getWeather(locationDetails[0].Key);
+		console.log(weatherDetails);
+
+		let newState = {
+			...locationDetails[0],
+			...weatherDetails[0],
+		};
+
+		setStatus(newState);
+		setLoading(false);
+	}
+
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<StatusContext.Provider value={status}>
