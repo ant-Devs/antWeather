@@ -1,6 +1,6 @@
 const apiDetails = require("./apiDetails");
 
-module.exports = async function getLocation(city) {
+export default async function getLocation(city) {
 	try {
 		const url = `${apiDetails.locationsURL}?apikey=${apiDetails.apiKey2}&q=${city}`;
 
@@ -12,4 +12,4 @@ module.exports = async function getLocation(city) {
 		console.error(err.message);
 		throw err;
 	}
-};
+}

@@ -1,6 +1,6 @@
 const apiDetails = require("./apiDetails");
 
-module.exports = async function getWeather(
+export default async function getWeather(
 	locationCode,
 	includeDetails = true
 ) {
@@ -13,4 +13,4 @@ module.exports = async function getWeather(
 	} catch (err) {
 		console.error(err);
 	}
-};
+}
