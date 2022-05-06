@@ -1,0 +1,67 @@
+@layer base {
+	@font-face {
+		font-family: "Raleway";
+		src: local("Raleway"),
+			url("../fonts/Raleway-VariableFont_wght.ttf") format("truetype");
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "Raleway";
+		src: local("Raleway"),
+			url("../fonts/Raleway-Italic-VariableFont_wght.ttf")
+				format("truetype");
+		font-style: italic;
+	}
+
+	/* YANTRAMANAV */
+
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Black.ttf") format("truetype");
+		font-weight: 900;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Black.ttf") format("truetype");
+		font-weight: 800;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Bold.ttf") format("truetype");
+		font-weight: 700;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Medium.ttf") format("truetype");
+		font-weight: 600;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Medium.ttf") format("truetype");
+		font-weight: 500;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Regular.ttf") format("truetype");
+		font-weight: 400;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Thin.ttf") format("truetype");
+		font-weight: 300;
+	}
+	@font-face {
+		font-family: "Yantramanav";
+		src: local("Yantramanav"),
+			url("../fonts/Yantramanav-Light.ttf") format("truetype");
+		font-weight: 200;
+	}
+}

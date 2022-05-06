@@ -1,68 +1,73 @@
-import {useState} from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./styles/body.css";
+
+// utils
+import getLocation from "./utils/getLocation";
+import getWeather from "./utils/getWeather";
+
+// components
+import Input from "./components/Input/Input";
+import Header from "./components/Header";
+import Status from "./components/status/Status";
+import Error from "./components/Error";
+import Loading from "./components/Loading";
+export const StatusContext = React.createContext();
 
 function App() {
+	const [loading, setLoading] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [status, setStatus] = useState({});
 
-  const apiDetails = {
-    locationsURL: "http://dataservice.accuweather.com/locations/v1/cities/search",
-    weatherURL: 'http://dataservice.accuweather.com/currentconditions/v1/',
-    apiKey: "b42vl29tgDCNr4wRBBam7Cnh59EUbovA"
-  }
+	async function dispatch(action) {
+		console.log("reducing...");
+		try {
+			setLoading(true);
 
-  async function getLocation(city) {
-    try {
-      const url = `${apiDetails.locationsURL}?apikey=${apiDetails.apiKey}&q=${city}`;
-       
-      const data = await fetch(url);
-    const jsonData = await data.json(); 
+			const locationDetails = await getLocation(action);
+			const locationKey = locationDetails[0].Key;
 
-    return jsonData;
-    } catch (err) {
-      console.error(err.message)
-    }
-  }
+			if (!locationKey) {
+				console.log("location key unavailable");
+				throw new Error("location key unavailable");
+			}
+			console.log("location key obtained...");
+			const weatherDetails = await getWeather(locationKey);
 
-  async function getWeather(location, includeDetails = false) {
-    try {
-      const locationDetails = await getLocation(location);
-      const locationCode = locationDetails[0].Key;
-      const url = `${apiDetails.weatherURL}${locationCode}?apikey=${apiDetails.apiKey}&details=${includeDetails}`
+			if (!weatherDetails) {
+				console.log("Weather details not available");
+				throw new Error("weather details unavailable");
+			}
 
-      const data = await fetch(url);
-      const jsonData = await data.json();
-      console.log(jsonData);  
-      return jsonData;
-    }
-    catch(err) {
-      console.error(err);
-    }
-  } 
-   
-  const [location, setLocation ] = useState('');
+			let newState = {
+				...locationDetails[0],
+				...weatherDetails[0],
+			};
 
-  const [weather, setWeather] = useState({});
+			setStatus(newState);
+			setLoading(false);
+			//
+		} catch (err) {
+			console.error(err);
+			setLoading(false);
+			setIsError(true);
+		}
+	}
 
-  async function submission(e) {
-    
-      e.preventDefault();
-      console.log(location)
-      const data = await getWeather(location)
-      setWeather(data[0]);
-      
-    }
-  return (
-    <div className="App">
-      <h2 className="title">antWeather</h2>
-      <form onSubmit={submission}>
-        <input type="text" onChange={(e) => {
-          setLocation(e.target.value);
-        }} />
-        <input type="submit" value="Get Weather" />
-      </form>
-      <h2>The weather is </h2>
-      <p>{ weather ? weather.WeatherText : 'no weather atm'}</p>
-    </div>
-  );
+	return (
+		<StatusContext.Provider value={status}>
+			<div className="App mt-5 w-10/12 md:w-8/12 mx-auto flex flex-col items-center ">
+				<Header />
+				<Input onSubmitHandler={dispatch} />
+				{isError ? (
+					<Error />
+				) : loading ? (
+					<Loading />
+				) : (
+					<Status status={status} />
+				)}
+			</div>
+		</StatusContext.Provider>
+	);
 }
 
 export default App;
