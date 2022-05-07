@@ -8,7 +8,6 @@ const GeolocationPositionError = {
 };
 
 export async function successCallback(position) {
-	const { latitude, longitude } = position.coords;
 	console.info("Position obtained: ");
 	console.log(position);
 
@@ -65,6 +64,8 @@ export function errorHandler(err) {
 		case GeolocationPositionError.POSITION_UNAVAILABLE:
 			// Position not available.
 			console.warn("Position unavailable; failed to get location");
+			break;
+		default:
 			break;
 	}
 }
