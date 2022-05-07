@@ -26,7 +26,6 @@ function App() {
 						: `opacity-100 ${hidden[2]}`
 				}
 			/>
-			:
 		</>
 	);
 }
