@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StatusContext } from "../../App";
+import { StatusContext } from "../WeatherApp";
 
 const Illustration = () => {
 	const status = useContext(StatusContext);

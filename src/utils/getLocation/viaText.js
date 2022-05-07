@@ -1,4 +1,4 @@
-const apiDetails = require("./apiDetails");
+const apiDetails = require("../apiDetails");
 
 export default async function getLocation(city) {
 	try {

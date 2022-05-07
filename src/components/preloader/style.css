@@ -1,0 +1,80 @@
+#antDevs-logo {
+	--stroke-width: 2;
+	--stroke-width-final: 19;
+	--circle-length: 180.6;
+
+	--fillDelay: 3s;
+	--fillDelay2: 2.5s;
+}
+
+#antDevs-logo path {
+	stroke-width: 0;
+}
+#antDevs-logo #path1 {
+	stroke-width: var(--stroke-width);
+	stroke-dasharray: 975.3;
+	stroke-dashoffset: 975.3;
+	animation: drawLine 1s ease forwards 1s,
+		deepen 1s ease-in forwards var(--fillDelay2);
+}
+#antDevs-logo #path2 {
+	stroke-width: var(--stroke-width);
+	stroke-dasharray: 975.3;
+	stroke-dashoffset: 975.3;
+	animation: drawLine 1s ease forwards 1s,
+		deepen 1s ease-in forwards var(--fillDelay2);
+}
+#antDevs-logo #path3 {
+	stroke-width: var(--stroke-width);
+	stroke-dasharray: 1642.55;
+	stroke-dashoffset: 1642.55;
+	animation: drawLine 1s ease forwards 1s,
+		deepen 1s ease-in forwards var(--fillDelay2);
+}
+
+/*  circles  */
+#antDevs-logo circle {
+	stroke-width: var(--stroke-width);
+	stroke-dasharray: var(--circle-length);
+	stroke-dashoffset: var(--circle-length);
+	animation: drawLine 1s ease-in-out forwards 2s,
+		fillIn 1s ease-in forwards var(--fillDelay);
+}
+
+@keyframes drawLine {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes deepen {
+	to {
+		stroke-width: var(--stroke-width-final);
+	}
+}
+
+@keyframes fillIn {
+	to {
+		fill: currentColor;
+	}
+}
+
+@keyframes shrink {
+	from {
+		width: 30rem;
+	}
+	to {
+		width: 15rem;
+	}
+}
+
+#antDevsLogo {
+	/* outline: 1px solid white; */
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 30rem;
+	animation: shrink 2s ease forwards var(--fillDelay);
+}

@@ -1,8 +1,0 @@
-@import url("./_colors.css");
-
-body {
-	width: 100%;
-
-	background-color: var(--dark-100);
-	color: var(--white);
-}
