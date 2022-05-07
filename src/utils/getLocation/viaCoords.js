@@ -1,6 +1,6 @@
-import { geoLocationURL } from "./apiDetails";
+import { geoLocationURL } from "../apiDetails";
 
-async function getLocation2(geoLocation) {
+async function getLocationDetailsByCoords(geoLocation) {
 	const data = await fetch(
 		`${geoLocationURL}${geoLocation.coords.latitude},${geoLocation.coords.longitude}`
 	);
@@ -9,4 +9,4 @@ async function getLocation2(geoLocation) {
 	return jsonData;
 }
 
-export default getLocation2;
+export default getLocationDetailsByCoords;

@@ -1,4 +1,5 @@
 @import url("./styles/_fonts.css");
+@import url("./styles/_colors.css");
 
 @tailwind base;
 @tailwind components;
@@ -9,10 +10,18 @@ body {
 
 	background-image: url(./bgs/clouds.png);
 	background-size: cover;
+
 	background-repeat: no-repeat;
 	background-blend-mode: multiply;
-}
+	background-position-x: 65%;
 
+	background-color: var(--gray-300);
+
+	color: var(--white);
+}
+#root {
+	min-height: 90vh;
+}
 @media screen and (min-width: 640px) {
 	body {
 		background-image: url(./bgs/twilight.jpg);

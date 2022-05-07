@@ -1,93 +1,32 @@
 import React, { useEffect, useState } from "react";
-import "./styles/body.css";
-
-// utils
-import getLocation from "./utils/getLocation";
-import getWeather from "./utils/getWeather";
-import getLocation2 from "./utils/getLocation2";
-
-// components
-import Input from "./components/Input/Input";
-import Header from "./components/Header";
-import Status from "./components/status/Status";
-import Error from "./components/Error";
-import Loading from "./components/Loading";
-export const StatusContext = React.createContext();
+import WeatherApp from "./components/WeatherApp";
+import Preloader from "./components/preloader";
 
 function App() {
-	const [loading, setLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [status, setStatus] = useState({});
-
-	async function dispatch(action) {
-		console.log("reducing...");
-		try {
-			setLoading(true);
-
-			const locationDetails = await getLocation(action);
-			const locationKey = locationDetails[0].Key;
-
-			if (!locationKey) {
-				console.log("location key unavailable");
-				throw new Error("location key unavailable");
-			}
-			console.log("location key obtained...");
-			const weatherDetails = await getWeather(locationKey);
-
-			if (!weatherDetails) {
-				console.log("Weather details not available");
-				throw new Error("weather details unavailable");
-			}
-
-			let newState = {
-				...locationDetails[0],
-				...weatherDetails[0],
-			};
-
-			setStatus(newState);
-			setLoading(false);
-			//
-		} catch (err) {
-			console.error(err);
-			setLoading(false);
-			setIsError(true);
-		}
-	}
-
-	function fetchData() {
-		setLoading(true);
-		navigator.geolocation.getCurrentPosition(async (e) => {
-			const locationDetails = await getLocation2(e);
-			const weatherDetails = await getWeather(locationDetails.Key);
-
-			let newState = {
-				...locationDetails,
-				...weatherDetails[0],
-			};
-
-			setStatus(newState);
-			setLoading(false);
-		});
-	}
+	const [loading, setLoading] = useState(true);
+	const [hidden, setHidden] = useState({ 1: "", 2: "hidden" });
 
 	useEffect(() => {
-		fetchData();
+		setTimeout(() => {
+			setLoading(false);
+		}, 5000);
+		setTimeout(() => {
+			setHidden({ 1: "hidden", 2: "" });
+		}, 6000);
 	}, []);
-
 	return (
-		<StatusContext.Provider value={status}>
-			<div className="App mt-5 w-10/12 md:w-8/12 mx-auto flex flex-col items-center ">
-				<Header />
-				<Input onSubmitHandler={dispatch} />
-				{isError ? (
-					<Error />
-				) : loading ? (
-					<Loading />
-				) : (
-					<Status status={status} />
-				)}
-			</div>
-		</StatusContext.Provider>
+		<>
+			<Preloader
+				props={loading ? "opacity-100" : `opacity-0 ${hidden[1]}`}
+			/>{" "}
+			<WeatherApp
+				props={
+					loading
+						? `opacity-0 ${hidden[2]}`
+						: `opacity-100 ${hidden[2]}`
+				}
+			/>
+		</>
 	);
 }
 

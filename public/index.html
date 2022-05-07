@@ -3,30 +3,51 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+		<link rel="icon" href="%PUBLIC_URL%/favicon.svg" />
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1"
 		/>
 		<meta name="theme-color" content="#000000" />
+
+		<title>AntWeather</title>
 		<meta
 			name="description"
-			content="Web site created using create-react-app"
+			content="A Weather app from the antDevelopers created using Reactjs"
 		/>
-		<!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-		<!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-		<title>React App</title>
+		<!-- Open Graph / Facebook -->
+		<!-- this is what Facebook and other social websites will draw on -->
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:url"
+			content="https://antWeather.netlify.app"
+		/>
+		<meta property="og:title" content="antWeather" />
+		<meta
+			property="og:description"
+			content="A Weather app from the antDevelopers created using Reactjs"
+		/>
+		<meta property="og:image" content="./antWeather.jpg" />
+
+		<!-- Twitter -->
+		<!-- You can have different summary for Twitter! -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta
+			property="twitter:url"
+			content="https://antWeather.netlify.app"
+		/>
+		<meta
+			property="twitter:title"
+			content="Weather app straight from the antDevelopers"
+		/>
+		<meta
+			property="twitter:description"
+			content="A Weather app from the antDevelopers created using Reactjs"
+		/>
+		<meta property="twitter:image" content="./antWeather.jpg" />
 	</head>
 	<body>
 		<noscript

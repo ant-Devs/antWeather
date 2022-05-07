@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
 	return (
-		<header className=" headerComponent flex align-middle justify-center mt-12 mb-4">
+		<header className=" headerComponent flex align-middle justify-center md:mt-3 mt-16 mb-2">
 			<Logo />
 			<h2 className="text-4xl font-semibold text-left p-0 md:p-8 md:pl-0">
 				ant<br></br>Weather

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { StatusContext } from "../../App";
+import { StatusContext } from "../WeatherApp";
 
 function TimePlace(className) {
 	let date = new Date();
@@ -11,10 +11,10 @@ function TimePlace(className) {
 			className={`location flex flex-col justify-center gap-6 ${className}`}
 		>
 			<div>
-				<p className="city text-2xl font-semibold  text-left">
+				<p className="city text-2xl  text-left">
 					{status ? status.LocalizedName : "Location"}
 				</p>
-				<p className="region text-lg">
+				<p className="region font-semibold text-lg ">
 					{status.AdministrativeArea
 						? status.AdministrativeArea.LocalizedName
 						: ""}
@@ -24,7 +24,9 @@ function TimePlace(className) {
 				{status.TimeZone ? (
 					<>
 						{days[date.getDay()]}, <br />{" "}
-						{date.toDateString().substring(4)}
+						<span className="font-semibold">
+							{date.toDateString().substring(4)}
+						</span>
 					</>
 				) : null}
 			</p>

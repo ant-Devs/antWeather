@@ -2,13 +2,17 @@
 @font-face {
 	font-family: "Raleway";
 	src: url("../fonts/Raleway-VariableFont_wght.ttf")
-		format("truetype");
+		format("truetype-variations");
 	font-style: normal;
+	font-stretch: 75% 125%;
+	font-weight: 120 950;
 }
 
 @font-face {
 	font-family: "Raleway";
 	src: url("../fonts/Raleway-Italic-VariableFont_wght.ttf")
-		format("truetype");
+		format("truetype-variations");
 	font-style: italic;
+	font-stretch: 75% 125%;
+	font-weight: 120 950;
 }
