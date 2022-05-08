@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WeatherApp from "./components/WeatherApp";
 import Preloader from "./components/preloader";
+import getWeather from "./utils/getWeather";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -14,6 +15,7 @@ function App() {
 			setHidden({ 1: "hidden", 2: "" });
 		}, 6000);
 	}, []);
+
 	return (
 		<>
 			<Preloader

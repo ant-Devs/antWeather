@@ -1,12 +1,15 @@
+import axios from "axios";
 import { geoLocationURL } from "../apiDetails";
 
 async function getLocationDetailsByCoords(geoLocation) {
-	const data = await fetch(
-		`${geoLocationURL}${geoLocation.coords.latitude},${geoLocation.coords.longitude}`
-	);
-	const jsonData = await data.json();
-
-	return jsonData;
+	try {
+		const data = await axios.get(
+			`${geoLocationURL}${geoLocation.coords.latitude},${geoLocation.coords.longitude}`
+		);
+		return data.data;
+	} catch (err) {
+		throw err;
+	}
 }
 
 export default getLocationDetailsByCoords;

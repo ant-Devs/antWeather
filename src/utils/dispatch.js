@@ -7,23 +7,23 @@ export default async function dispatch(action) {
 		this.setStatus({ ...this.status, loading: true, isError: false });
 
 		const locationDetails = await getLocationDetailsByText(action);
-		const locationKey = locationDetails[0].Key;
-
-		if (!locationKey) {
+		if (!("Key" in locationDetails)) {
 			console.log("location key unavailable");
 			throw new Error("location key unavailable");
 		}
-		console.log("location key obtained...");
-		const weatherDetails = await getWeather(locationKey);
+		const locationKey = locationDetails.Key;
 
+		console.info("location key obtained...");
+		const weatherDetails = await getWeather(locationKey);
 		if (!weatherDetails) {
 			console.log("Weather details not available");
 			throw new Error("weather details unavailable");
 		}
+		console.log("weather details obtained");
 
 		let newState = {
-			...locationDetails[0],
-			...weatherDetails[0],
+			...locationDetails,
+			...weatherDetails,
 		};
 
 		this.setStatus({
@@ -36,6 +36,11 @@ export default async function dispatch(action) {
 		//
 	} catch (err) {
 		console.error(err);
-		this.setStatus({ ...this.status, loading: false, isError: true });
+		this.setStatus({
+			...this.status,
+			loading: false,
+			isError: true,
+			errorMessage: err.message,
+		});
 	}
 }

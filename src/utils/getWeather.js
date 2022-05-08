@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const apiDetails = require("./apiDetails");
 
 export default async function getWeather(
@@ -5,12 +7,11 @@ export default async function getWeather(
 	includeDetails = true
 ) {
 	try {
-		const url = `${apiDetails.weatherURL}${locationCode}?apikey=${apiDetails.apiKey2}&details=${includeDetails}`;
-
-		const data = await fetch(url);
-		const jsonData = await data.json();
-		return jsonData;
+		const data = await axios.get(
+			`${apiDetails.weatherURL}${locationCode}?apikey=${apiDetails.apiKey2}&details=${includeDetails}`
+		);
+		return data.data[0];
 	} catch (err) {
-		console.error(err);
+		throw err;
 	}
 }
