@@ -9,31 +9,28 @@ const GeolocationPositionError = {
 
 export async function successCallback(position) {
 	console.info("Position obtained: ");
-	console.log(position);
 
 	try {
 		this.setStatus({ ...this.status, loading: true, isError: false });
 
 		const locationDetails = await viaCoords(position);
-		console.log(locationDetails);
 		const locationKey = locationDetails.Key;
 
-		if (!locationKey) {
+		if (!("Key" in locationDetails)) {
 			console.info("location key unavailable");
 			throw new Error("location key unavailable");
 		}
 		console.info("location key obtained...");
 		const weatherDetails = await getWeather(locationKey);
-		console.log(weatherDetails);
 
-		if (!weatherDetails[0]) {
+		if (!weatherDetails) {
 			console.log("Weather details not available");
 			throw new Error("weather details unavailable");
 		}
 
 		let newState = {
 			...locationDetails,
-			...weatherDetails[0],
+			...weatherDetails,
 		};
 
 		this.setStatus({
@@ -45,7 +42,7 @@ export async function successCallback(position) {
 
 		//
 	} catch (err) {
-		console.error(err);
+		console.trace(err);
 		this.setStatus({ ...this.status, loading: false, isError: true });
 	}
 }

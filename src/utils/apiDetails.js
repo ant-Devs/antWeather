@@ -1,7 +1,7 @@
 module.exports = {
 	// accuweather
 
-	geoLocationURL: `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_ACCU_API_1}&q=`,
+	geoLocationURL: `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=XzPAPcfHHboIjNxp8QUMJxrFWak91weM&q=`,
 
 	locationsURL:
 		"https://dataservice.accuweather.com/locations/v1/cities/search",
