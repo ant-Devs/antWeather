@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 
 //utils
 import dispatch from "../utils/dispatch";
+
 import {
 	errorHandler,
 	options,
 	successCallback,
 } from "../utils/getLocation/geoPosition";
+import getWeather from "../utils/getWeather";
 
 // components
 import { Input, Header, Status, Error, Loading } from "./imports";
@@ -23,7 +25,7 @@ const WeatherApp = ({ props }) => {
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(
 			successCallback.bind({ setStatus, status }),
-			errorHandler,
+			errorHandler.bind({ setStatus, status }),
 			options
 		);
 	}, []);
@@ -31,14 +33,14 @@ const WeatherApp = ({ props }) => {
 	return (
 		<StatusContext.Provider value={status}>
 			<div
-				className={`${props} transition-opacity duration-1000 App mt-5 w-10/12 md:w-8/12 mx-auto flex flex-col items-center tracking-[0.2px]`}
+				className={`${props} transition-opacity duration-1000 App mt-5 w-10/12 md:w-9/12 mx-auto flex flex-col items-center tracking-[0.2px]`}
 			>
 				<Header />
 				<Input
 					onSubmitHandler={dispatch.bind({ setStatus, status })}
 				/>
 				{status.isError ? (
-					<Error />
+					<Error errorMessage={status.errorMessage} />
 				) : status.loading ? (
 					<Loading />
 				) : (
